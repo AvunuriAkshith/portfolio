@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Akshith Avunuri | Portfolio - Fullstack Developer</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1e1e2a;
+            --bg-elevated: #252531;
+            --text-primary: #f1f3f8;
+            --text-secondary: #b9c3d4;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-glow: rgba(59,130,246,0.5);
+            --border-dim: #2d2d3a;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+            transition: background 0.3s;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        /* Navbar - glassmorphic dark */
+        .navbar {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-dim);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: 0.3s;
+            font-size: 15px;
+            position: relative;
+        }
+
+        .nav-links li a:hover {
+            color: var(--accent-blue);
+        }
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s;
+        }
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 56px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #fff, var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 4px;
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(circle at 10% 30%, rgba(37,99,235,0.08), transparent 70%);
+            padding: 90px 0 80px;
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .hero-greeting {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--accent-blue);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+        .hero-content h1 {
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.7s ease;
+        }
+        .hero-name-highlight {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.9s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(95deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            box-shadow: 0 6px 14px rgba(59,130,246,0.25);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(59,130,246,0.4);
+        }
+        .btn-outline {
+            border: 2px solid var(--accent-blue);
+            background: transparent;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
+        .hero-avatar {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            width: 280px;
+            height: 280px;
+            border-radius: 38% 62% 47% 53% / 45% 42% 58% 55%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.5), 0 0 0 3px rgba(59,130,246,0.2);
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* About Cards */
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+        }
+        .about-text, .about-details {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 32px;
+            border: 1px solid var(--border-dim);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .about-text:hover, .about-details:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.5);
+            border-color: var(--accent-blue);
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 18px;
+            border-bottom: 1px dashed var(--border-dim);
+            padding-bottom: 12px;
+        }
+        .info-label {
+            width: 110px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+        .project-complete {
+            background: rgba(59,130,246,0.15);
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-top: 24px;
+        }
+
+        /* Skills progress bars */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+        }
+        .skills-bars {
+            flex: 1.5;
+        }
+        .skill-item {
+            margin-bottom: 32px;
+        }
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .progress-bar {
+            background: #2d2d3a;
+            height: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            height: 10px;
+            border-radius: 12px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Cards for Services, Projects, Blog */
+        .services-grid, .projects-grid, .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 32px;
+        }
+        .service-card, .project-card, .blog-card {
+            background: var(--bg-card);
+            padding: 32px 24px;
+            border-radius: 28px;
+            transition: all 0.4s;
+            border: 1px solid var(--border-dim);
+            backdrop-filter: blur(4px);
+        }
+        .service-card:hover, .project-card:hover, .blog-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 30px -12px rgba(59,130,246,0.2);
+        }
+        .service-card i, .project-card i, .blog-card i {
+            font-size: 44px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* Resume */
+        .resume-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .resume-col {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 32px;
+            border: 1px solid var(--border-dim);
+            transition: all 0.3s;
+        }
+        .resume-item {
+            margin-bottom: 28px;
+            border-left: 3px solid var(--accent-blue);
+            padding-left: 20px;
+        }
+
+        /* Contact form */
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+        }
+        .contact-info, .contact-form {
+            flex: 1;
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 32px;
+            border: 1px solid var(--border-dim);
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(59,130,246,0.15);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            font-size: 24px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-dim);
+            border-radius: 28px;
+            font-family: inherit;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+        button[type="submit"] {
+            background: linear-gradient(95deg, var(--accent-blue), var(--accent-purple));
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button[type="submit"]:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-dim);
+            color: var(--text-secondary);
+        }
+
+        /* animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="container nav-wrapper">
+        <div class="logo">✦ Akshith</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container hero-grid">
+        <div class="hero-content" data-aos="fade-right" data-aos-duration="800">
+            <div class="hero-greeting">HELLO!</div>
+            <h1>I'm <span class="hero-name-highlight">Avunuri Akshith</span></h1>
+            <div class="hero-title">Fullstack Developer</div>
+            <div class="btn-group">
+                <a href="#contact" class="btn-primary">HIRE ME <i class="fas fa-arrow-right"></i></a>
+                <a href="#projects" class="btn-outline">MY WORKS</a>
+            </div>
+        </div>
+        <div class="hero-badge" data-aos="fade-left" data-aos-duration="800">
+            <div class="hero-avatar">
+    <img src="./pofile.jpg" alt="Avunuri Akshith" style="width: 100%; height: 100%; object-fit: cover; border-radius: 38% 62% 47% 53% / 45% 42% 58% 55%;">
+</div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text" data-aos="fade-right" data-aos-delay="100">
+                <p style="font-size: 18px; line-height: 1.6;">I am a passionate AIML student currently pursuing my B.Tech at SR University. I have a strong foundation in programming languages including C, C++, Java, and Python, along with web technologies like HTML, CSS, and JavaScript. I enjoy building real-world projects and continuously improving my skills in machine learning and software development. I am actively seeking internship opportunities where I can apply my knowledge and grow as a developer.</p>
+            </div>
+            <div class="about-details" data-aos="fade-left" data-aos-delay="150">
+                <div class="info-row"><span class="info-label">Name:</span><span>Avunuri Akshith</span></div>
+                <div class="info-row"><span class="info-label">Date of birth:</span><span>October 13, 2006</span></div>
+                <div class="info-row"><span class="info-label">Address:</span><span>Warangal</span></div>
+                <div class="info-row"><span class="info-label">Zipcode:</span><span> 506002</span></div>
+                <div class="info-row"><span class="info-label">Email:</span><span>avunuriakshith@gmail.com</span></div>
+                <div class="info-row"><span class="info-label">Phone:</span><span>+91 9392769190</span></div>
+                <div class="download-cv">
+                    <a href="./resume.pdf" class="btn-primary" style="padding: 10px 24px;">DOWNLOAD CV <i class="fas fa-download"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Resume -->
+<section id="resume">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Resume</h2>
+        <div class="resume-grid">
+            <div class="resume-col" data-aos="zoom-in" data-aos-delay="100">
+                <h3 style="margin-bottom: 28px;"><i class="fas fa-briefcase"></i> Work Experience</h3>
+                <div class="resume-item"><div class="resume-date">Nov 2024 - May 2025</div><h4>
+                    Internship Trainee at SCCL</h4></div>
+                <div class="resume-item"></div>
+            </div>
+            <div class="resume-col" data-aos="zoom-in" data-aos-delay="200">
+                <h3 style="margin-bottom: 28px;"><i class="fas fa-graduation-cap"></i> Education</h3>
+                <div class="resume-item"><div class="resume-date">2025 - 2028</div><h4>Artifical Intelligence & Machine Learning</h4><p>SR University</p><p> focus on web technologies & AI.</p></div>
+                <div class="resume-item"><div class="resume-date">2025</div><h4>Azure AI Fundamentals</h4><p>Certification - Microsoft AI-900</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section with percentages (PHP 96%, jQuery85%, HTML5 95%, CSS3 90%, WP 70%, SEO 80%) -->
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">My Skills</h2>
+        <div class="skills-wrapper">
+           <div class="skills-bars" data-aos="fade-left">
+    <div class="skill-item"><div class="skill-info"><span>C</span><span class="skill-percent">75%</span></div><div class="progress-bar"><div class="progress-fill" data-width="75"></div></div></div>
+    <div class="skill-item"><div class="skill-info"><span>Python</span><span class="skill-percent">85%</span></div><div class="progress-bar"><div class="progress-fill" data-width="85"></div></div></div>
+    <div class="skill-item"><div class="skill-info"><span>Java</span><span class="skill-percent">60%</span></div><div class="progress-bar"><div class="progress-fill" data-width="60"></div></div></div>
+    <div class="skill-item"><div class="skill-info"><span>C++</span><span class="skill-percent">70%</span></div><div class="progress-bar"><div class="progress-fill" data-width="70"></div></div></div>
+    <div class="skill-item"><div class="skill-info"><span>HTML5/CSS3</span><span class="skill-percent">80%</span></div><div class="progress-bar"><div class="progress-fill" data-width="80"></div></div></div>
+    <div class="skill-item"><div class="skill-info"><span>JavaScript</span><span class="skill-percent">80%</span></div><div class="progress-bar"><div class="progress-fill" data-width="80"></div></div></div>
+</div>
+    </div>
+</section>
+
+<!-- Projects Section with Modal -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="50" onclick="openProjectModal(0)">
+                <i class="fas fa-cart-shopping"></i>
+                <h3>ML-Based Placement Readiness & Skill Development System</h3>
+                <p>A Machine Learning-powered system designed to analyze student profiles and predict placement readiness. The platform provides personalized skill development recommendations and includes a resume analyzer that calculates ATS scores and identifies missing skills based on role-specific requirements (SDE / Data Scientist). The system helps students understand their strengths and improve their chances of placement through data-driven insights.</p>
+                <span class="view-details">Click to view details →</span>
+            </div>     
+        </div>
+    </div>
+</section>
+
+<!-- Modal Popup -->
+<div id="projectModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeProjectModal()">&times;</span>
+        <div class="modal-header">
+            <i id="modalIcon" class="fas fa-cart-shopping"></i>
+            <h2 id="modalTitle">Project Title</h2>
+        </div>
+        <div class="modal-body">
+            <p id="modalFullDescription">Full project description goes here...</p>
+            <div class="modal-tech">
+                <strong>Technologies:</strong>
+                <span id="modalTech"></span>
+            </div>
+            <div class="modal-features">
+                <strong>Key Features:</strong>
+                <ul id="modalFeatures"></ul>
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <a href="#" id="liveDemoBtn" class="btn-primary" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="#" id="githubBtn" class="btn-outline" target="_blank"><i class="fab fa-github"></i> GitHub Repository</a>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--bg-card);
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 28px;
+    border: 1px solid var(--accent-blue);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    position: absolute;
+    right: 24px;
+    top: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--accent-blue);
+    transform: scale(1.1);
+}
+
+.modal-header {
+    padding: 28px 32px 16px 32px;
+    border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.modal-header i {
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.modal-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 28px 32px;
+}
+
+.modal-body p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.modal-tech, .modal-features {
+    margin-top: 20px;
+}
+
+.modal-tech strong, .modal-features strong {
+    color: var(--accent-blue);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-features ul {
+    margin-left: 20px;
+    color: var(--text-secondary);
+}
+
+.modal-features li {
+    margin: 8px 0;
+}
+
+.modal-buttons {
+    padding: 20px 32px 32px 32px;
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid var(--border-dim);
+    flex-wrap: wrap;
+}
+
+.view-details {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.view-details:hover {
+    transform: translateX(5px);
+}
+
+.project-card {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.project-card:hover .view-details {
+    color: var(--accent-purple);
+}
+</style>
+
+<script>
+// Project Data
+const projectsData = [
+    {
+        title: "ML-Based Placement Readiness & Skill Development System",
+        icon: "fa-cart-shopping",
+        fullDescription: "A Machine Learning-powered system designed to analyze student profiles and predict placement readiness. The platform provides personalized skill development recommendations and includes a resume analyzer that calculates ATS scores and identifies missing skills based on role-specific requirements (SDE / Data Scientist). The system helps students understand their strengths and improve their chances of placement through data-driven insights.",
+        technologies: "Python, Streamlit, Scikit-learn, Pandas, NumPy, Matplotlib, PyPDF2",
+        features: [
+            "Placement readiness prediction using Logistic Regression",
+            "ROC Curve visualization for model performance",
+            "Personalized skill development roadmap",
+            "Resume Analyzer with ATS score calculation",
+            "Role-based recommendations (SDE / Data Scientist)",
+            "Integrated learning resources (YouTube + PDF notes)",
+        ],
+        liveDemo: "https://placement-readiness-predictor.onrender.com",
+        github: "https://github.com/AvunuriAkshith/Placement_Readiness_Predictor"
+    },
+    {
+        
+    },
+    {
+        
+    },
+];
+
+// Modal functions
+function openProjectModal(index) {
+    const project = projectsData[index];
+    const modal = document.getElementById('projectModal');
+    
+    // Set modal content
+    document.getElementById('modalTitle').textContent = project.title;
+    document.getElementById('modalFullDescription').textContent = project.fullDescription;
+    document.getElementById('modalTech').textContent = project.technologies;
+    
+    // Set icon
+    const iconElement = document.getElementById('modalIcon');
+    iconElement.className = `fas ${project.icon}`;
+    
+    // Set features list
+    const featuresList = document.getElementById('modalFeatures');
+    featuresList.innerHTML = project.features.map(feature => `<li>${feature}</li>`).join('');
+    
+    // Set buttons (replace # with actual URLs)
+    const liveBtn = document.getElementById('liveDemoBtn');
+    const githubBtn = document.getElementById('githubBtn');
+    
+    liveBtn.href = project.liveDemo;
+    githubBtn.href = project.github;
+    
+    // Show modal with animation
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeProjectModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('projectModal');
+        if (modal.style.display === 'block') {
+            closeProjectModal();
+        }
+    }
+});
+</script>
+
+
+
+<!-- Contact -->
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Contact</h2>
+        <div class="contact-flex">
+            <div class="contact-info" data-aos="fade-right">
+                <div class="contact-detail"><div class="contact-icon"><i class="fas fa-map-pin"></i></div><div>Warangal</div></div>
+                <div class="contact-detail"><div class="contact-icon"><i class="fas fa-phone-alt"></i></div><div>+91 9392769190</div></div>
+                <div class="contact-detail"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div>avunuriakshith@gmail.com</div></div>
+                <div class="contact-detail"><div class="contact-icon"><i class="fab fa-github"></i></div><div>/AvunuriAkshith</div></div>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form id="darkContactForm">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <textarea rows="4" placeholder="Your Message..."></textarea>
+                    <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+                <p id="formFeedbackDark" style="margin-top: 16px; font-size: 14px;"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 Avunuri Akshith — Fullstack Developer. All rights reserved.</p>
+        <div style="margin-top: 16px;">
+            <a href="https://linkedin.com/in/avunuriakshith" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: inline-block;">
+                <i class="fab fa-linkedin" style="margin: 0 12px; cursor: pointer; font-size: 20px; color: var(--text-secondary); transition: 0.3s;"></i>
+            </a>
+            <a href="https://github.com/AvunuriAkshith" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: inline-block;">
+                <i class="fab fa-github" style="margin: 0 12px; cursor: pointer; font-size: 20px; color: var(--text-secondary); transition: 0.3s;"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Add hover effect for social icons */
+footer .fa-linkedin:hover,
+footer .fa-github:hover {
+    color: var(--accent-blue) !important;
+    transform: translateY(-3px);
+}
+</style>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
+    // ✅ EmailJS - REPLACE THESE WITH YOUR ACTUAL KEYS
+    const EMAILJS_PUBLIC_KEY = "XX1CCAXv4hyhi65GK";     // ✅ REPLACE: Get from Account → API Keys
+    const EMAILJS_SERVICE_ID = "service_bdfg1xm";      // ✅ REPLACE: Your actual Service ID
+    const EMAILJS_TEMPLATE_ID = "template_8bgtny5";    // ✅ REPLACE: Your actual Template ID
+    
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    
+    // Animate progress bars on scroll
+    const progressFillElements = document.querySelectorAll('.progress-fill');
+    function animateProgressBars() {
+        progressFillElements.forEach(bar => {
+            const rect = bar.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight - 100 && rect.bottom > 0;
+            if (isVisible && !bar.style.width && bar.getAttribute('data-width')) {
+                const widthVal = bar.getAttribute('data-width');
+                bar.style.width = widthVal + '%';
+            }
+        });
+    }
+    window.addEventListener('scroll', animateProgressBars);
+    window.addEventListener('load', animateProgressBars);
+
+    // Contact form handler with EmailJS
+    const darkForm = document.getElementById('darkContactForm');
+    if(darkForm) {
+        darkForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = darkForm.querySelector('input[placeholder="Full Name"]').value;
+            const email = darkForm.querySelector('input[placeholder="Email Address"]').value;
+            const message = darkForm.querySelector('textarea').value;
+            const feedback = document.getElementById('formFeedbackDark');
+            
+            // Validate inputs
+            if(!name || !email || !message) {
+                feedback.innerHTML = '<span style="color: #ef4444;">❌ Please fill in all fields.</span>';
+                setTimeout(() => feedback.innerHTML = '', 3000);
+                return;
+            }
+            
+            // Show loading message
+            feedback.innerHTML = '<span style="color: #3b82f6;">⏳ Sending message...</span>';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                time: new Date().toLocaleString('en-US', { 
+                    dateStyle: 'full', 
+                    timeStyle: 'short' 
+                })
+            };
+            
+            // Send email using EmailJS
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('Success:', response);
+                    feedback.innerHTML = '<span style="color: #10b981;">✅ Message sent successfully! I\'ll get back to you soon.</span>';
+                    darkForm.reset();
+                    setTimeout(() => feedback.innerHTML = '', 5000);
+                })
+                .catch(function(error) {
+                    console.error('EmailJS Error:', error);
+                    feedback.innerHTML = '<span style="color: #ef4444;">❌ Failed to send. Please email me directly: avunuriakshith@gmail.com</span>';
+                    setTimeout(() => feedback.innerHTML = '', 5000);
+                });
+        });
+    }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a, .btn-primary, .btn-outline').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const hash = this.getAttribute('href');
+            if(hash && hash.startsWith('#') && hash !== '#') {
+                const target = document.querySelector(hash);
+                if(target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
